@@ -13,6 +13,7 @@
     <name>restaurant-domain</name>
 
     <modules>
+        <module>restaurant-application-service</module>
         <module>restaurant-domain-core</module>
     </modules>
 
