@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.food.ordering.system.order.service.domain.entity.Order.DELIMITER;
+
 @Component
 public class OrderDataAccessMapper {
 
@@ -26,11 +28,11 @@ public class OrderDataAccessMapper {
                 .customerId(order.getCustomerId().getValue())
                 .restaurantId(order.getRestaurantId().getValue())
                 .trackingId(order.getTrackingId().getValue())
-                .address(deliverAddressToAddressEntity(order.getDeliveryAddress()))
+                .address(deliveryAddressToAddressEntity(order.getDeliveryAddress()))
                 .price(order.getPrice().getAmount())
                 .items(orderItemsToOrderItemEntities(order.getItems()))
                 .orderStatus(order.getOrderStatus())
-                .failureMessages(order.getFailureMessages() != null ? String.join(Order.DELIMITER) : "")
+                .failureMessages(order.getFailureMessages() != null ? String.join(DELIMITER, order.getFailureMessages()) : "")
                 .build();
         orderEntity.getAddress().setOrder(orderEntity);
         orderEntity.getItems().forEach(orderItemEntity -> orderItemEntity.setOrder(orderEntity));
@@ -47,7 +49,7 @@ public class OrderDataAccessMapper {
                 .items(orderItemEntitiesToOrderItems(orderEntity.getItems()))
                 .trackingId(new TrackingId(orderEntity.getTrackingId()))
                 .orderStatus(orderEntity.getOrderStatus())
-                .failureMessages(orderEntity.getFailureMessages().isEmpty() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(orderEntity.getFailureMessages().split(Order.DELIMITER))))
+                .failureMessages(orderEntity.getFailureMessages().isEmpty() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(orderEntity.getFailureMessages().split(DELIMITER))))
                 .build();
     }
 
@@ -82,7 +84,7 @@ public class OrderDataAccessMapper {
                 .collect(Collectors.toList());
     }
 
-    private OrderAddressEntity deliverAddressToAddressEntity(StreetAddress deliveryAddress) {
+    private OrderAddressEntity deliveryAddressToAddressEntity(StreetAddress deliveryAddress) {
         return OrderAddressEntity.builder()
                 .id(deliveryAddress.getId())
                 .city(deliveryAddress.getCity())
