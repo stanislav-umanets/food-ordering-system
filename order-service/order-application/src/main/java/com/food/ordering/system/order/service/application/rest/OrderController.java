@@ -26,7 +26,7 @@ public class OrderController {
     public ResponseEntity<CreateOrderResponse> createOrder(@RequestBody CreateOrderCommand createOrderCommand) {
         log.info("Creating order for customer: {}, at restaurant: {}", createOrderCommand.getCustomerId(), createOrderCommand.getRestaurantId());
         CreateOrderResponse createOrderResponse = orderApplicationService.createOrder(createOrderCommand);
-        log.info("Order created with tracking id: {}", createOrderResponse.getOrderTackingId());
+        log.info("Order created with tracking id: {}", createOrderResponse.getOrderTrackingId());
         return ResponseEntity.ok(createOrderResponse);
     }
 

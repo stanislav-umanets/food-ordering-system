@@ -28,14 +28,6 @@ public class OrderDataMapper {
                 .build();
     }
 
-    public TrackOrderResponse orderToTrackOrderResponse(Order order) {
-        return TrackOrderResponse.builder()
-                .orderTrackingId(order.getTrackingId().getValue())
-                .orderStatus(order.getOrderStatus())
-                .failureMessages(order.getFailureMessages())
-                .build();
-    }
-    
     public Order createOrderCommandToOrder(CreateOrderCommand createOrderCommand) {
         return Order.builder()
                 .customerId(new CustomerId(createOrderCommand.getCustomerId()))
@@ -48,9 +40,17 @@ public class OrderDataMapper {
 
     public CreateOrderResponse orderToCreateOrderResponse(Order order, String message) {
         return CreateOrderResponse.builder()
-                .orderTackingId(order.getTrackingId().getValue())
+                .orderTrackingId(order.getTrackingId().getValue())
                 .orderStatus(order.getOrderStatus())
                 .message(message)
+                .build();
+    }
+
+    public TrackOrderResponse orderToTrackOrderResponse(Order order) {
+        return TrackOrderResponse.builder()
+                .orderTrackingId(order.getTrackingId().getValue())
+                .orderStatus(order.getOrderStatus())
+                .failureMessages(order.getFailureMessages())
                 .build();
     }
 
