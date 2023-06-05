@@ -115,4 +115,15 @@ public class Payment extends AggregateRoot<PaymentId> {
             return new Payment(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "orderId=" + orderId.getValue().toString() +
+                ", customerId=" + customerId.getValue().toString() +
+                ", price=" + price.getAmount().toString() +
+                ", paymentStatus=" + paymentStatus +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

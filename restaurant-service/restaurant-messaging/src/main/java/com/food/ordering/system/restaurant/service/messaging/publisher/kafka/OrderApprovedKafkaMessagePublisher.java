@@ -49,7 +49,7 @@ public class OrderApprovedKafkaMessagePublisher implements OrderApprovedMessageP
                             orderId,
                             "RestaurantApprovalResponseAvroModel"));
 
-            log.info("RestaurantApprovalResponseAvroModel sent to kafka at: {}", System.nanoTime());
+            log.info("RestaurantApprovalResponseAvroModel sent to topic name: {}, at: {}", restaurantServiceConfigData.getRestaurantApprovalResponseTopicName(), System.nanoTime());
         } catch (Exception e) {
             log.error("Error while sending RestaurantApprovalResponseAvroModel message" +
                     " to kafka with order id: {}, error: {}", orderId, e.getMessage());

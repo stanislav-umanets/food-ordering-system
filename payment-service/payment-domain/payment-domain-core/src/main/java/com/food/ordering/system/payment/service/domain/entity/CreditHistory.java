@@ -69,4 +69,13 @@ public class CreditHistory extends BaseEntity<CreditHistoryId> {
             return new CreditHistory(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "CreditHistory{" +
+                "customerId=" + customerId.getValue().toString() +
+                ", amount=" + amount.getAmount().toString() +
+                ", transactionType=" + transactionType.toString() +
+                '}';
+    }
 }

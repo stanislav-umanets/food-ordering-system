@@ -31,6 +31,7 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
                                                    List<String> failureMessages,
                                                    DomainEventPublisher<PaymentCompletedEvent> paymentCompletedEventDomainEventPublisher,
                                                    DomainEventPublisher<PaymentFailedEvent> paymentFailedEventDomainEventPublisher) {
+        log.info("\nPayment: {}\n CreditEntry: {}\n List<CreditHistory>: {}\n failureMessages: {}\n", payment, creditEntry, creditHistories, failureMessages);
         payment.validatePayment(failureMessages);
         payment.initializePayment();
         validateCreditEntry(payment, creditEntry, failureMessages);

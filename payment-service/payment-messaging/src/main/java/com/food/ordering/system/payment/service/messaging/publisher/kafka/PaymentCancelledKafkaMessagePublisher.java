@@ -49,7 +49,7 @@ public class PaymentCancelledKafkaMessagePublisher implements PaymentCancelledMe
                             orderId,
                             "PaymentResponseAvroModel"));
 
-            log.info("PaymentResponseAvroModel sent to kafka for order id: {}", orderId);
+            log.info("PaymentResponseAvroModel sent to topic name: {}, for order id: {}",paymentServiceConfigData.getPaymentResponseTopicName(), orderId);
         } catch (Exception e) {
             log.error("Error while sending PaymentResponseAvroModel message" +
                     " to kafka with order id: {}, error: {}", orderId, e.getMessage());

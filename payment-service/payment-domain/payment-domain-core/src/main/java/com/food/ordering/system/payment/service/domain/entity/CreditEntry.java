@@ -64,4 +64,12 @@ public class CreditEntry extends BaseEntity<CreditEntryId> {
             return new CreditEntry(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "CreditEntry{" +
+                "customerId=" + customerId.getValue().toString() +
+                ", totalCreditAmount=" + totalCreditAmount.getAmount().toString() +
+                '}';
+    }
 }
