@@ -13,7 +13,7 @@ public class CustomerDataMapper {
 
     public Customer customerCommandToCustomer(CreateCustomerCommand createCustomerCommand) {
         return new Customer(
-                new CustomerId(UUID.randomUUID()),
+                new CustomerId(UUID.fromString(createCustomerCommand.getId())),
                 createCustomerCommand.getUserName(),
                 createCustomerCommand.getFirstName(),
                 createCustomerCommand.getLastName());

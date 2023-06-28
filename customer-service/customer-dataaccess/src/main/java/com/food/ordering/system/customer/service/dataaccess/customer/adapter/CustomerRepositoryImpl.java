@@ -7,6 +7,7 @@ import com.food.ordering.system.customer.service.domain.ports.output.repository.
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class CustomerRepositoryImpl implements CustomerRepository {
@@ -26,7 +27,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public Optional<Customer> findByUserName(String userName) {
-        return customerJpaRepository.findByUsername(userName).map(customerDataAccessMapper::customerEntityToCustomer);
+    public Optional<Customer> findById(String id) {
+        return customerJpaRepository.findById(UUID.fromString(id)).map(customerDataAccessMapper::customerEntityToCustomer);
     }
 }

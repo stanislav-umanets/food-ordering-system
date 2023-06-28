@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 public class CreateCustomerCommand {
 
     @NotNull
+    private final String id;
+    @NotNull
     private final String userName;
     @NotNull
     private final String firstName;

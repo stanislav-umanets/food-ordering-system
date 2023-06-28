@@ -31,8 +31,8 @@ public class CustomerCreateCommandHandler {
 
     @Transactional
     public CustomerCreateEvent createCustomer(CreateCustomerCommand createCustomerCommand) {
-        checkCustomer(createCustomerCommand.getUserName());
         Customer customer = customerDataMapper.customerCommandToCustomer(createCustomerCommand);
+        checkCustomer(customer);
         saveCustomer(customer);
         return customerDomainService.validateAndInitiateCustomer(customer);
     }
@@ -47,11 +47,12 @@ public class CustomerCreateCommandHandler {
         log.info("Customer saved with id: {}", newCustomer.getId().getValue());
     }
 
-    private void checkCustomer(String userName) {
-        Optional<Customer> customer = customerRepository.findByUserName(userName);
-        if (customer.isPresent()) {
-            log.error("Customer with user name {} already exists", userName);
-            throw new CustomerDomainException("Customer with user name " + userName + " already exists");
+    private void checkCustomer(Customer customer) {
+        log.info("Checking customer {} for duplicates", customer);
+        Optional<Customer> persistedCustomer = customerRepository.findById(customer.getId().getValue().toString());
+        if (persistedCustomer.isPresent()) {
+            log.error("Customer with id {} already exists", customer.getId().getValue().toString());
+            throw new CustomerDomainException("Customer with id " + customer.getId().getValue().toString() + " already exists");
         }
     }
 
