@@ -27,6 +27,6 @@ Eventually, to apply automate deployment, scaling and managing in this project w
 
 ## Tech Stack
 
-Java 17, Spring Boot:2.7.0(WEB, JPA, Kafka, Tx, Validation), Kafka as the Event Store, PostgreSQL, Docker, 
+Java 17, Spring Boot:2.7.0(WEB, JPA, Kafka, Tx, Validation), Kafka as the Event Store, PostgreSQL, Docker, K8S
 
 
